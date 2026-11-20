@@ -33,3 +33,8 @@ git push origin --tags
 ```
 
 不要用骨架 force push 覆盖已有历史。
+
+## V0.4 — evidence-reuse generation engine
+
+- [Source and usage](dbforge_v04/README.md)
+- [Experiment summary](dbforge_v04/EXPERIMENT.md): 30 unit tests and 108 verified synthetic-data builds; up to 1.201x median paired speedup in these cases. Earlier versions retained.
