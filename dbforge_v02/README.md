@@ -1,0 +1,11 @@
+# DBForge V0.2 — budgeted database synthesis
+
+Python standard library only. Run `python dbforge.py input.csv output.sqlite --budget 40000 --strategy bound`. `--budget` is a deterministic count of row-pair validation visits, **not** a wall-clock or total computation limit. Omit it for unlimited analysis; `--flat` bypasses discovery; `--keys customer_id product_id` specifies eligible determinants. Source data are exact CSV strings; query `original_data` and order by the sequence column recorded in `dbforge_metadata` for reconstruction. The database is a verified snapshot, not a prediction of future business constraints.
+
+## Algorithm
+
+Restrict determinants to explicit or identifier-like names (unless unrestricted). Column profiles use exact cardinality and UTF-8 payload counts. For candidate i→j, an upper bound on dependent payload savings is total_j − distinct_bytes_j − (cardinality_i − cardinality_j) × min_len_j. Prune nonpositive bounds or entire determinant groups whose aggregate upper bound cannot cover duplicated key payload. Prioritize remaining pairs by total_j × (1 − cardinality_i/N). Stop before exceeding the validation budget; reject incomplete validation. Feed proven dependencies into the V0.1 greedy disjoint-star planner. With unlimited budget, pruning preserves its positive-payload plan, not all FDs. It does not guarantee optimal physical database size.
+
+## Reproduce
+
+`python -m unittest -v` (16 tests); `python benchmark_budget.py` (6 synthetic datasets, 10 configurations, 3 repeats, randomized run order). See `benchmark_budget_results.json` for per-run timings, sizes and plans. Baseline shares the V0.1 implementation but avoids scanning payload for empty plans. The wide random no-key case intentionally tests early fallback. No external FD engine or real-world dataset was measured. All builds verify exact ordered reconstruction and SQLite integrity. Profiling time, schema planning, writing and verification are excluded from the row-pair budget, but included in total elapsed time. All configurations use identical SQLite build/validation logic. Benefit priority is heuristic and may lose to fixed ordering; payload savings do not always equal on-disk savings. The prior greedy planner is not globally optimal. No query workload optimization or multi-column dependencies yet.
