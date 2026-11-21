@@ -1,0 +1,79 @@
+{
+  "environment": {
+    "python": "3.13.5",
+    "sqlite": "3.46.1",
+    "platform": "Linux x86_64, cgroup memory limit 4 GiB"
+  },
+  "rows": 1000000,
+  "csv_bytes": 130056617,
+  "repeats": 2,
+  "summary": {
+    "v04": {
+      "elapsed_s_median": 10.583272659999949,
+      "peak_rss_mib_median": 912.4765625,
+      "output_bytes": 51470336,
+      "verified_runs": 2
+    },
+    "v05_streaming": {
+      "elapsed_s_median": 16.786482675500025,
+      "peak_rss_mib_median": 116.671875,
+      "output_bytes": 51490816,
+      "verified_runs": 2,
+      "stage_bytes": 158670848,
+      "validation_rows_scanned": 2000000
+    }
+  },
+  "memory_reduction_ratio": 0.8721,
+  "speed_ratio_v04_over_v05": 0.6305,
+  "raw": {
+    "v04": [
+      {
+        "elapsed_s": 10.067677781999976,
+        "peak_rss_mib": 912.48046875,
+        "output_bytes": 51470336,
+        "verified": true,
+        "rows": 1000000
+      },
+      {
+        "elapsed_s": 11.098867537999922,
+        "peak_rss_mib": 912.47265625,
+        "output_bytes": 51470336,
+        "verified": true,
+        "rows": 1000000
+      }
+    ],
+    "v05_streaming": [
+      {
+        "elapsed_s": 16.22499787700002,
+        "peak_rss_mib": 116.66796875,
+        "output_bytes": 51490816,
+        "verified": true,
+        "rows": 1000000,
+        "stage_seconds": 2.5640116999999805,
+        "analysis_seconds": 7.142803452999999,
+        "build_seconds": 2.1768681070000184,
+        "verify_seconds": 4.332588593000025,
+        "validation_rows_scanned": 2000000,
+        "stage_bytes": 158670848
+      },
+      {
+        "elapsed_s": 17.34796747400003,
+        "peak_rss_mib": 116.67578125,
+        "output_bytes": 51490816,
+        "verified": true,
+        "rows": 1000000,
+        "stage_seconds": 2.6159803280000915,
+        "analysis_seconds": 7.641989641000009,
+        "build_seconds": 2.32374086599998,
+        "verify_seconds": 4.756339136999941,
+        "validation_rows_scanned": 2000000,
+        "stage_bytes": 158670848
+      }
+    ]
+  },
+  "cross_database_set_comparison": {
+    "old_minus_new_rows": 0,
+    "new_minus_old_rows": 0,
+    "row_count_each": 1000000
+  }
+}
