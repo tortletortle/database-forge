@@ -1,0 +1,181 @@
+{
+  "title": "DBForge V0.6 full-pipeline comparisons",
+  "environment": {
+    "python": "3.13.5",
+    "sqlite": "3.46.1",
+    "platform": "Linux x86_64, 4 GiB cgroup memory limit"
+  },
+  "cases": {
+    "20000": {
+      "rows": 20000,
+      "repeats": 2,
+      "summary": {
+        "v05": {
+          "elapsed_s_median": 0.2621689814995989,
+          "peak_rss_mib_median": 102.984375,
+          "analysis_seconds_median": 0.09165772750020551,
+          "index_build_seconds_median": 0.0,
+          "verified_runs": 2
+        },
+        "none": {
+          "elapsed_s_median": 0.24822958500044479,
+          "peak_rss_mib_median": 104.666015625,
+          "analysis_seconds_median": 0.08858460400051626,
+          "index_build_seconds_median": 0.0,
+          "verified_runs": 2
+        }
+      }
+    },
+    "100000": {
+      "rows": 100000,
+      "repeats": 2,
+      "summary": {
+        "v05": {
+          "elapsed_s_median": 1.487865410500035,
+          "peak_rss_mib_median": 116.69921875,
+          "analysis_seconds_median": 0.590224009999929,
+          "index_build_seconds_median": 0.0,
+          "verified_runs": 2
+        },
+        "none": {
+          "elapsed_s_median": 1.49748548999969,
+          "peak_rss_mib_median": 116.41015625,
+          "analysis_seconds_median": 0.5629411834997882,
+          "index_build_seconds_median": 0.0,
+          "verified_runs": 2
+        }
+      }
+    },
+    "250000": {
+      "rows": 250000,
+      "repeats": 2,
+      "summary": {
+        "v05": {
+          "elapsed_s_median": 4.092481307000071,
+          "peak_rss_mib_median": 116.291015625,
+          "analysis_seconds_median": 1.7517322210001112,
+          "index_build_seconds_median": 0.0,
+          "verified_runs": 2
+        },
+        "none": {
+          "elapsed_s_median": 3.4837950245000684,
+          "peak_rss_mib_median": 116.6640625,
+          "analysis_seconds_median": 1.2756266515002608,
+          "index_build_seconds_median": 0.0,
+          "verified_runs": 2
+        }
+      }
+    },
+    "1000000": {
+      "rows": 1000000,
+      "repeats": 2,
+      "summary": {
+        "v05": {
+          "elapsed_s_median": 16.786482675500025,
+          "analysis_seconds_median": 7.392396547000004,
+          "peak_rss_mib_median": 116.671875,
+          "verified_runs": 2
+        },
+        "none": {
+          "elapsed_s_median": 15.197804868000276,
+          "analysis_seconds_median": 5.085246725499928,
+          "peak_rss_mib_median": 116.62890625,
+          "verified_runs": 2
+        }
+      },
+      "raw": {
+        "v05": [
+          {
+            "elapsed_s": 16.22499787700002,
+            "peak_rss_mib": 116.66796875,
+            "output_bytes": 51490816,
+            "verified": true,
+            "rows": 1000000,
+            "stage_seconds": 2.5640116999999805,
+            "analysis_seconds": 7.142803452999999,
+            "build_seconds": 2.1768681070000184,
+            "verify_seconds": 4.332588593000025,
+            "validation_rows_scanned": 2000000,
+            "stage_bytes": 158670848
+          },
+          {
+            "elapsed_s": 17.34796747400003,
+            "peak_rss_mib": 116.67578125,
+            "output_bytes": 51490816,
+            "verified": true,
+            "rows": 1000000,
+            "stage_seconds": 2.6159803280000915,
+            "analysis_seconds": 7.641989641000009,
+            "build_seconds": 2.32374086599998,
+            "verify_seconds": 4.756339136999941,
+            "validation_rows_scanned": 2000000,
+            "stage_bytes": 158670848
+          }
+        ],
+        "none": [
+          {
+            "elapsed_s": 15.334484240000165,
+            "peak_rss_mib": 116.6640625,
+            "analysis_seconds": 5.216052064999531,
+            "verified": true,
+            "rows": 1000000,
+            "dependencies": [
+              [
+                "customer_id",
+                "customer_name"
+              ],
+              [
+                "customer_id",
+                "region"
+              ],
+              [
+                "product_id",
+                "product_name"
+              ],
+              [
+                "product_id",
+                "category"
+              ]
+            ]
+          },
+          {
+            "elapsed_s": 15.061125496000386,
+            "peak_rss_mib": 116.59375,
+            "stage_seconds": 2.9064018529998066,
+            "profile_seconds": 3.0939880650003033,
+            "analysis_seconds": 4.954441386000326,
+            "build_seconds": 2.4990102909996494,
+            "verify_seconds": 4.692430287999741,
+            "index_build_seconds": 0.0,
+            "indexes_built": 0,
+            "verified": true,
+            "rows": 1000000,
+            "dependencies": [
+              [
+                "customer_id",
+                "customer_name"
+              ],
+              [
+                "customer_id",
+                "region"
+              ],
+              [
+                "product_id",
+                "product_name"
+              ],
+              [
+                "product_id",
+                "category"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "notes": [
+    "Every reported full-pipeline run completed exact reconstruction verification.",
+    "All compared modes discovered identical dependency sets.",
+    "250k and 1M V0.6 default no-index runs used zero temporary indexes."
+  ]
+}

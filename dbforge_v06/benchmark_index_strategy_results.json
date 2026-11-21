@@ -1,0 +1,270 @@
+{
+  "title": "DBForge V0.6 index strategy investigation",
+  "environment": {
+    "python": "3.13.5",
+    "sqlite": "3.46.1",
+    "platform": "Linux x86_64, 4 GiB cgroup memory limit",
+    "cache_mib": 8,
+    "temp_store": "FILE",
+    "mmap_size": 0
+  },
+  "strategies": [
+    "none",
+    "determinant",
+    "covering"
+  ],
+  "workloads": {
+    "orders_random_1m": {
+      "rows": 1000000,
+      "columns": [
+        "order_id",
+        "customer_id",
+        "customer_name",
+        "region",
+        "product_id",
+        "product_name",
+        "category",
+        "quantity",
+        "note"
+      ],
+      "repeats": 2,
+      "stage_seconds": 2.9746102330000213,
+      "stage_bytes": 141606912,
+      "summary": {
+        "none": {
+          "total_scan_s_median": 1.2602569965006296,
+          "peak_rss_mib_median": 110.69921875,
+          "per_scan": [
+            {
+              "key": "customer_id",
+              "build_s_median": 0.0,
+              "query_s_median": 0.6579761210005017,
+              "index_bytes_median": 0.0
+            },
+            {
+              "key": "product_id",
+              "build_s_median": 0.0,
+              "query_s_median": 0.6022808755001279,
+              "index_bytes_median": 0.0
+            }
+          ]
+        },
+        "determinant": {
+          "total_scan_s_median": 3.674520450498676,
+          "peak_rss_mib_median": 110.875,
+          "per_scan": [
+            {
+              "key": "customer_id",
+              "build_s_median": 0.4987759109999388,
+              "query_s_median": 1.4523757604997627,
+              "index_bytes_median": 17063936.0
+            },
+            {
+              "key": "product_id",
+              "build_s_median": 0.4704009019997102,
+              "query_s_median": 1.2529678769992643,
+              "index_bytes_median": 17059840.0
+            }
+          ]
+        },
+        "covering": {
+          "total_scan_s_median": 1.7361874935008927,
+          "peak_rss_mib_median": 110.88671875,
+          "per_scan": [
+            {
+              "key": "customer_id",
+              "build_s_median": 0.7067035865002254,
+              "query_s_median": 0.16780106950045592,
+              "index_bytes_median": 58073088.0
+            },
+            {
+              "key": "product_id",
+              "build_s_median": 0.7125013220002074,
+              "query_s_median": 0.14918151550000402,
+              "index_bytes_median": 66281472.0
+            }
+          ]
+        }
+      },
+      "comparisons": {
+        "determinant": {
+          "exact_group_results_match_no_index": true
+        },
+        "covering": {
+          "exact_group_results_match_no_index": true
+        }
+      },
+      "raw_file": "benchmark_index_strategy_raw_orders_random_1m.json"
+    },
+    "high_cardinality_1m": {
+      "rows": 1000000,
+      "columns": [
+        "order_id",
+        "customer_id",
+        "customer_name",
+        "region",
+        "product_id",
+        "product_name",
+        "category",
+        "quantity",
+        "note"
+      ],
+      "repeats": 2,
+      "stage_seconds": 3.078125416000148,
+      "stage_bytes": 141606912,
+      "summary": {
+        "none": {
+          "total_scan_s_median": 1.5339526650000153,
+          "peak_rss_mib_median": 110.732421875,
+          "per_scan": [
+            {
+              "key": "customer_id",
+              "build_s_median": 0.0,
+              "query_s_median": 0.778488757499872,
+              "index_bytes_median": 0.0
+            },
+            {
+              "key": "product_id",
+              "build_s_median": 0.0,
+              "query_s_median": 0.7554639075001433,
+              "index_bytes_median": 0.0
+            }
+          ]
+        },
+        "determinant": {
+          "total_scan_s_median": 4.296427193499312,
+          "peak_rss_mib_median": 110.9375,
+          "per_scan": [
+            {
+              "key": "customer_id",
+              "build_s_median": 0.5404753119996712,
+              "query_s_median": 1.6976584619997084,
+              "index_bytes_median": 17063936.0
+            },
+            {
+              "key": "product_id",
+              "build_s_median": 0.5068937215000915,
+              "query_s_median": 1.551399697999841,
+              "index_bytes_median": 17063936.0
+            }
+          ]
+        },
+        "covering": {
+          "total_scan_s_median": 1.9671400390011513,
+          "peak_rss_mib_median": 110.88671875,
+          "per_scan": [
+            {
+              "key": "customer_id",
+              "build_s_median": 0.6964045385002464,
+              "query_s_median": 0.3199481120004748,
+              "index_bytes_median": 57761792.0
+            },
+            {
+              "key": "product_id",
+              "build_s_median": 0.6770716435003123,
+              "query_s_median": 0.27371574500011775,
+              "index_bytes_median": 66129920.0
+            }
+          ]
+        }
+      },
+      "comparisons": {
+        "determinant": {
+          "exact_group_results_match_no_index": true
+        },
+        "covering": {
+          "exact_group_results_match_no_index": true
+        }
+      },
+      "raw_file": "benchmark_index_strategy_raw_high_cardinality_1m.json"
+    },
+    "customer_sorted_999990": {
+      "rows": 999990,
+      "columns": [
+        "order_id",
+        "customer_id",
+        "customer_name",
+        "region",
+        "product_id",
+        "product_name",
+        "category",
+        "quantity",
+        "note"
+      ],
+      "repeats": 2,
+      "stage_seconds": 2.9201905930003704,
+      "stage_bytes": 141606912,
+      "summary": {
+        "none": {
+          "total_scan_s_median": 1.001746503000959,
+          "peak_rss_mib_median": 110.748046875,
+          "per_scan": [
+            {
+              "key": "customer_id",
+              "build_s_median": 0.0,
+              "query_s_median": 0.4126415985006133,
+              "index_bytes_median": 0.0
+            },
+            {
+              "key": "product_id",
+              "build_s_median": 0.0,
+              "query_s_median": 0.5891049045003456,
+              "index_bytes_median": 0.0
+            }
+          ]
+        },
+        "determinant": {
+          "total_scan_s_median": 2.24036436499955,
+          "peak_rss_mib_median": 110.87109375,
+          "per_scan": [
+            {
+              "key": "customer_id",
+              "build_s_median": 0.27075149849997615,
+              "query_s_median": 0.22905209950022254,
+              "index_bytes_median": 17059840.0
+            },
+            {
+              "key": "product_id",
+              "build_s_median": 0.4526923654998427,
+              "query_s_median": 1.2878684014995088,
+              "index_bytes_median": 17059840.0
+            }
+          ]
+        },
+        "covering": {
+          "total_scan_s_median": 1.6012802275004105,
+          "peak_rss_mib_median": 110.849609375,
+          "per_scan": [
+            {
+              "key": "customer_id",
+              "build_s_median": 0.4726396135001778,
+              "query_s_median": 0.17153886000005514,
+              "index_bytes_median": 58040320.0
+            },
+            {
+              "key": "product_id",
+              "build_s_median": 0.7985129765002057,
+              "query_s_median": 0.1585887774999719,
+              "index_bytes_median": 66285568.0
+            }
+          ]
+        }
+      },
+      "comparisons": {
+        "determinant": {
+          "exact_group_results_match_no_index": true
+        },
+        "covering": {
+          "exact_group_results_match_no_index": true
+        }
+      },
+      "raw_file": "benchmark_index_strategy_raw_customer_sorted_999990.json"
+    }
+  },
+  "limitations": [
+    "Synthetic data only",
+    "Two repetitions per strategy and workload",
+    "One Linux environment",
+    "No Windows, network filesystem, or production dataset results"
+  ]
+}

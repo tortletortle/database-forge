@@ -1,0 +1,165 @@
+{
+  "source": "customer_sorted_999990.csv",
+  "rows": 999990,
+  "columns": ["order_id", "customer_id", "customer_name", "region", "product_id", "product_name", "category", "quantity", "note"],
+  "repeats": 2,
+  "stage_seconds": 2.9201905930003704,
+  "stage_bytes": 141606912,
+  "environment": {
+    "python": "3.13.5",
+    "sqlite": "3.46.1",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41"
+  },
+  "raw": {
+    "none": [
+      {
+        "mode": "none",
+        "results": [
+          {
+            "key": "customer_id",
+            "rhs": ["customer_name", "region"],
+            "build_s": 0.0,
+            "query_s": 0.43628526000065904,
+            "index_bytes": 0,
+            "result": [0, 0, 999990, 280387],
+            "plan": ["CO-ROUTINE (subquery-1)", "SCAN raw", "USE TEMP B-TREE FOR GROUP BY", "SCAN (subquery-1)"]
+          },
+          {
+            "key": "product_id",
+            "rhs": ["product_name", "category"],
+            "build_s": 0.0,
+            "query_s": 0.5849010370002361,
+            "index_bytes": 0,
+            "result": [0, 0, 43200, 12276],
+            "plan": ["CO-ROUTINE (subquery-1)", "SCAN raw", "USE TEMP B-TREE FOR GROUP BY", "SCAN (subquery-1)"]
+          }
+        ],
+        "peak_rss_mib": 110.734375
+      },
+      {
+        "mode": "none",
+        "results": [
+          {
+            "key": "customer_id",
+            "rhs": ["customer_name", "region"],
+            "build_s": 0.0,
+            "query_s": 0.3889979370005676,
+            "index_bytes": 0,
+            "result": [0, 0, 999990, 280387],
+            "plan": ["CO-ROUTINE (subquery-1)", "SCAN raw", "USE TEMP B-TREE FOR GROUP BY", "SCAN (subquery-1)"]
+          },
+          {
+            "key": "product_id",
+            "rhs": ["product_name", "category"],
+            "build_s": 0.0,
+            "query_s": 0.5933087720004551,
+            "index_bytes": 0,
+            "result": [0, 0, 43200, 12276],
+            "plan": ["CO-ROUTINE (subquery-1)", "SCAN raw", "USE TEMP B-TREE FOR GROUP BY", "SCAN (subquery-1)"]
+          }
+        ],
+        "peak_rss_mib": 110.76171875
+      }
+    ],
+    "determinant": [
+      {
+        "mode": "determinant",
+        "results": [
+          {
+            "key": "customer_id",
+            "rhs": ["customer_name", "region"],
+            "build_s": 0.23334514199996192,
+            "query_s": 0.23470373500003916,
+            "index_bytes": 17059840,
+            "result": [0, 0, 999990, 280387],
+            "plan": ["CO-ROUTINE (subquery-1)", "SCAN raw USING INDEX ix_dbforge_bench", "SCAN (subquery-1)"]
+          },
+          {
+            "key": "product_id",
+            "rhs": ["product_name", "category"],
+            "build_s": 0.47444161899966275,
+            "query_s": 1.3302118129995506,
+            "index_bytes": 17059840,
+            "result": [0, 0, 43200, 12276],
+            "plan": ["CO-ROUTINE (subquery-1)", "SCAN raw USING INDEX ix_dbforge_bench", "SCAN (subquery-1)"]
+          }
+        ],
+        "peak_rss_mib": 110.875
+      },
+      {
+        "mode": "determinant",
+        "results": [
+          {
+            "key": "customer_id",
+            "rhs": ["customer_name", "region"],
+            "build_s": 0.3081578549999904,
+            "query_s": 0.22340046400040592,
+            "index_bytes": 17059840,
+            "result": [0, 0, 999990, 280387],
+            "plan": ["CO-ROUTINE (subquery-1)", "SCAN raw USING INDEX ix_dbforge_bench", "SCAN (subquery-1)"]
+          },
+          {
+            "key": "product_id",
+            "rhs": ["product_name", "category"],
+            "build_s": 0.43094311200002267,
+            "query_s": 1.245524989999467,
+            "index_bytes": 17059840,
+            "result": [0, 0, 43200, 12276],
+            "plan": ["CO-ROUTINE (subquery-1)", "SCAN raw USING INDEX ix_dbforge_bench", "SCAN (subquery-1)"]
+          }
+        ],
+        "peak_rss_mib": 110.8671875
+      }
+    ],
+    "covering": [
+      {
+        "mode": "covering",
+        "results": [
+          {
+            "key": "customer_id",
+            "rhs": ["customer_name", "region"],
+            "build_s": 0.4505932620004387,
+            "query_s": 0.16321235099985643,
+            "index_bytes": 58040320,
+            "result": [0, 0, 999990, 280387],
+            "plan": ["CO-ROUTINE (subquery-1)", "SCAN raw USING COVERING INDEX ix_dbforge_bench", "SCAN (subquery-1)"]
+          },
+          {
+            "key": "product_id",
+            "rhs": ["product_name", "category"],
+            "build_s": 0.8130876750001335,
+            "query_s": 0.16341947999990225,
+            "index_bytes": 66285568,
+            "result": [0, 0, 43200, 12276],
+            "plan": ["CO-ROUTINE (subquery-1)", "SCAN raw USING COVERING INDEX ix_dbforge_bench", "SCAN (subquery-1)"]
+          }
+        ],
+        "peak_rss_mib": 110.88671875
+      },
+      {
+        "mode": "covering",
+        "results": [
+          {
+            "key": "customer_id",
+            "rhs": ["customer_name", "region"],
+            "build_s": 0.4946859649999169,
+            "query_s": 0.17986536900025385,
+            "index_bytes": 58040320,
+            "result": [0, 0, 999990, 280387],
+            "plan": ["CO-ROUTINE (subquery-1)", "SCAN raw USING COVERING INDEX ix_dbforge_bench", "SCAN (subquery-1)"]
+          },
+          {
+            "key": "product_id",
+            "rhs": ["product_name", "category"],
+            "build_s": 0.7839382780002779,
+            "query_s": 0.15375807500004157,
+            "index_bytes": 66285568,
+            "result": [0, 0, 43200, 12276],
+            "plan": ["CO-ROUTINE (subquery-1)", "SCAN raw USING COVERING INDEX ix_dbforge_bench", "SCAN (subquery-1)"]
+          }
+        ],
+        "peak_rss_mib": 110.8125
+      }
+    ]
+  }
+}
